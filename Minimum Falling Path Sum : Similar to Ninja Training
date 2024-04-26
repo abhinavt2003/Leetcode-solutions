@@ -1,0 +1,30 @@
+class Solution {
+public:
+   int solve(int day,int last,vector<vector<int>>&points,vector<vector<int>>&dp){
+    int n=points.size();
+    //base case
+    if(day==0){
+        int mini=100001;
+        for(int task=0;task<n;task++){
+            if(task!=last){
+                mini= min(mini,points[0][task]);
+            }
+        }
+        return mini;
+    }
+    if(dp[day][last]!=-1) return dp[day][last];
+    int mini=100001;
+    for(int i=0;i<n;i++){
+        if(i!=last){
+            int point= points[day][i]+ solve(day-1,i,points,dp);
+            mini= min(mini,point);
+        }
+    }
+    return dp[day][last]=mini;
+}
+    int minFallingPathSum(vector<vector<int>>& points) {
+        int n=points.size();
+        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        return solve(n-1,n,points,dp);
+    }
+};
