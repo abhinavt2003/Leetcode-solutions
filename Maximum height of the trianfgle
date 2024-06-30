@@ -1,0 +1,25 @@
+//Easy asked in the Leetcode conest
+//Not able to collect the logic
+//Based on greedy.
+//Revise it
+
+int f(int red,int blue){
+        int ans=0;
+        int i=1;
+        while(red>=0 && blue>=0){
+            if(i%2==0){
+                blue-=i;
+            }
+            else{
+                red-=i;
+            }
+            if(blue<0 || red<0) return ans;
+            i++;
+            ans++;
+        }
+        return ans;
+    }
+    int maxHeightOfTriangle(int red, int blue) {
+        int ans= max(f(red,blue),f(blue,red));
+        return ans;
+    }
